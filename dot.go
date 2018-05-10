@@ -25,21 +25,20 @@ func WriteDot(w io.Writer, cfg config.ServiceConfig) (n int64, err error) {
 
 const tmplGraph = `digraph krakend { {{ $port := .Port }}
     label="Server configuration - KrakenD API Gateway";
-		fontsize="25";
-		fontcolor="midnightblue";
-		labelloc="t";
-		labeljust="l";
-		rankdir="LR";
-		bgcolor="transparent";
-		style="solid";
-		penwidth="0.5";
-		pad="0.0";
-		nodesep="0.35";
+    fontsize="18";
+    labelloc="t";
+    labeljust="c";
+    rankdir="LR";
+    bgcolor="white";
+    style="solid";
+    penwidth="0.5";
+    pad="0.0";
+    nodesep="0.35";
 
-		node [shape="circle" style="filled"  fillcolor="#e0ecf4" color="lightgray" fontsize="12"];
+    node [shape="circle" style="filled"  fillcolor="white" color="lightgray" fontsize="12"];
 
 	{{ range $i, $endpoint := .Endpoints }}
-    {{printf "subgraph \"cluster_%s\" {" .Endpoint }}
+    {{printf "subgraph \"cluster_endpoint_%s\" {" .Endpoint }}
 		label="{{ .Endpoint }}";
 		bgcolor="#f7fcfd";
 		color="gainsboro";
@@ -48,9 +47,9 @@ const tmplGraph = `digraph krakend { {{ $port := .Port }}
 		fontsize="16";
 
         "{{ .Endpoint }}" [ shape=record, label="{ { Timeout | {{.Timeout.String}} } | { CacheTTL | {{.CacheTTL.String}} } | { Output | {{.OutputEncoding}} } | { QueryString | {{.QueryString}} } }" ]
-        {{ if .ExtraConfig }}"extra_{{$i}}" [ shape=record, label="{ {ExtraConfig} {{ range $key, $value := .ExtraConfig }} | { {{ $key }} {{ range $k, $v := $value }}| { {{$k}} | {{$v}} } {{ end }} }{{ end }} }" ]{{ end }}
+        {{ if .ExtraConfig }}"extra_{{$i}}" [ shape=record, fillcolor="lemonchiffon", label="{ {ExtraConfig} {{ range $key, $value := .ExtraConfig }} | { {{ $key }} {{ range $k, $v := $value }}| { {{$k}} | {{$v}} } {{ end }} }{{ end }} }" ]{{ end }}
 	    {{ range $j, $backend := .Backend }}
-	    {{printf "subgraph \"cluster_%s\" {" .URLPattern }}
+	    {{printf "subgraph \"cluster_backend_%s\" {" .URLPattern }}
 			label="{{ .URLPattern }}";
 			bgcolor="#e0ecf4";
 			fontsize="16";
@@ -61,7 +60,9 @@ const tmplGraph = `digraph krakend { {{ $port := .Port }}
 	    {{println "}" }}
 	    "{{ $endpoint.Endpoint }}" -> in_{{$i}}_{{$j}} [ label="x{{ .ConcurrentCalls }}"]{{ end }}
     {{ println "}" }}{{ end }}
+    ":{{ $port }}" [shape="doublecircle", style="filled", fontcolor="white", color="mediumslateblue", fillcolor="indigo"];
     {{ range .Endpoints }}
-    ":{{ $port }}" -> "{{ .Endpoint }}" [ label="{{ .Method }}"]{{ end }}
+    ":{{ $port }}" -> "{{ .Endpoint }}" [ label="{{ .Method }}" ]{{ end }}
+
 }
 `
