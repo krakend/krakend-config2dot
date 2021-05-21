@@ -5,7 +5,7 @@ import (
 	"io"
 	"text/template"
 
-	"github.com/devopsfaith/krakend/config"
+	"github.com/luraproject/lura/config"
 )
 
 type ServiceConfig config.ServiceConfig
