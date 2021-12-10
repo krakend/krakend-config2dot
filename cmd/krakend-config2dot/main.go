@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	dot "github.com/devopsfaith/krakend-config2dot"
-	"github.com/luraproject/lura/config"
+	dot "github.com/devopsfaith/krakend-config2dot/v2"
+	"github.com/luraproject/lura/v2/config"
 )
 
 func main() {
