@@ -4,7 +4,7 @@ Transalte your KrakenD config file into a dot graph
 ## Installation
 
 ```
-$ go install github.com/devopsfaith/krakend-config2dot/cmd/krakend-config2dot
+$ go install github.com/krakendio/krakend-config2dot/cmd/krakend-config2dot
 ```
 
 If you have your `$GOPATH/bin` in your `$PATH`, this is how you can create the `.dot` representation of your config file:

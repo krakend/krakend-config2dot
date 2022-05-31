@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	dot "github.com/devopsfaith/krakend-config2dot/v2"
+	dot "github.com/krakendio/krakend-config2dot/v2"
 	"github.com/luraproject/lura/v2/config"
 )
 
