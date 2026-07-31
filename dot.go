@@ -5,7 +5,7 @@ import (
 	"io"
 	"text/template"
 
-	"github.com/luraproject/lura/v2/config"
+	"github.com/luraproject/lura/v3/config"
 )
 
 type ServiceConfig config.ServiceConfig
