@@ -1,9 +1,7 @@
-module github.com/krakend/krakend-config2dot/v2
+module github.com/krakend/krakend-config2dot/v3
 
-go 1.23.0
+go 1.25.0
 
-toolchain go1.24.2
+require github.com/luraproject/lura/v3 v3.0.0-20260729144624-4b3057d09348
 
-require github.com/luraproject/lura/v2 v2.11.0
-
-require golang.org/x/text v0.26.0 // indirect
+require golang.org/x/text v0.37.0 // indirect
